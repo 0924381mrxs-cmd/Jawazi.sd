@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071a35">
+<title>جوازي | الخدمات الإلكترونية</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+  background:#f4f7fb;
+  color:#10233f;
+  min-height:100vh;
+}
+
+button,input,select{
+  font-family:inherit;
+}
+
+.header{
+  background:linear-gradient(145deg,#061a35,#0b3561);
+  color:white;
+  padding:22px 18px 35px;
+  border-radius:0 0 30px 30px;
+}
+
+.header-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:700px;
+  margin:auto;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-icon{
+  width:45px;
+  height:45px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+
+.logo h1{
+  font-size:23px;
+}
+
+.logo small{
+  display:block;
+  color:#b9cce1;
+  font-size:11px;
+  margin-top:2px;
+}
+
+.demo{
+  font-size:10px;
+  background:#ffffff18;
+  border:1px solid #ffffff25;
+  padding:7px 10px;
+  border-radius:20px;
+}
+
+.hero{
+  max-width:700px;
+  margin:28px auto 0;
+}
+
+.hero h2{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#c8d8e9;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.container{
+  width:calc(100% - 28px);
+  max-width:700px;
+  margin:-15px auto 40px;
+  position:relative;
+}
+
+.notice{
+  background:#fff8df;
+  border:1px solid #f1df9a;
+  color:#715c16;
+  padding:14px;
+  border-radius:17px;
+  font-size:12px;
+  line-height:1.7;
+  margin-bottom:18px;
+}
+
+.card{
+  background:white;
+  border-radius:23px;
+  padding:20px;
+  box-shadow:0 8px 30px rgba(16,35,63,.07);
+  margin-bottom:16px;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.card-sub{
+  color:#7b8999;
+  font-size:12px;
+  margin-bottom:17px;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.service{
+  border:1px solid #e4eaf1;
+  background:#fbfcfe;
+  border-radius:18px;
+  padding:16px 8px;
+  cursor:pointer;
+  text-align:center;
+  transition:.2s;
+}
+
+.service.active{
+  background:#edf6ff;
+  border-color:#2378d7;
+  box-shadow:0 4px 15px rgba(35,120,215,.12);
+}
+
+.service-icon{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.service strong{
+  display:block;
+  font-size:13px;
+}
+
+.service span{
+  color:#8995a4;
+  font-size:10px;
+  display:block;
+  margin-top:4px;
+}
+
+.steps{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.steps:before{
+  content:"";
+  position:absolute;
+  top:15px;
+  right:10%;
+  left:10%;
+  height:2px;
+  background:#e1e7ef;
+  z-index:0;
+}
+
+.step{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  font-size:10px;
+  color:#8995a4;
+}
+
+.step-circle{
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:#e5eaf0;
+  color:#718094;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto auto 5px;
+  font-weight:bold;
+}
+
+.step.active{
+  color:#1670cf;
+}
+
+.step.active .step-circle{
+  background:#1670cf;
+  color:white;
+}
+
+.step.done .step-circle{
+  background:#19a66b;
+  color:white;
+}
+
+.form-step{
+  display:none;
+}
+
+.form-step.active{
+  display:block;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:7px;
+  color:#34465e;
+}
+
+input,select{
+  width:100%;
+  border:1px solid #dce3eb;
+  background:#fafbfd;
+  border-radius:13px;
+  padding:13px;
+  font-size:14px;
+  outline:none;
+  color:#172b46;
+  transition:.2s;
+}
+
+input:focus,select:focus{
+  border-color:#2782dc;
+  background:white;
+  box-shadow:0 0 0 3px #2782dc15;
+}
+
+.readonly{
+  background:#edf6ff;
+  color:#1767b4;
+  font-weight:bold;
+}
+
+.section-title{
+  font-size:14px;
+  margin:17px 0 12px;
+  padding-bottom:8px;
+  border-bottom:1px solid #edf0f4;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:14px 18px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:bold;
+  flex:1;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#0878df,#1453a3);
+  color:white;
+  box-shadow:0 7px 18px #0878df25;
+}
+
+.btn-secondary{
+  background:#eef2f6;
+  color:#34465e;
+}
+
+.btn-success{
+  background:#18a56a;
+  color:white;
+}
+
+.camera-box{
+  background:#091d36;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:12px;
+  position:relative;
+  min-height:260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#camera{
+  width:100%;
+  display:none;
+  max-height:380px;
+  object-fit:cover;
+}
+
+.camera-placeholder{
+  color:#b8c7d8;
+  text-align:center;
+  padding:30px;
+}
+
+.camera-placeholder div{
+  font-size:45px;
+  margin-bottom:10px;
+}
+
+.photo-preview{
+  width:170px;
+  height:210px;
+  object-fit:cover;
+  border-radius:15px;
+  display:none;
+  border:3px solid white;
+  box-shadow:0 5px 20px #0003;
+}
+
+.upload-box{
+  border:2px dashed #d6dee8;
+  border-radius:17px;
+  padding:18px;
+  text-align:center;
+  background:#fafbfd;
+  margin-bottom:12px;
+}
+
+.upload-box .icon{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.upload-box p{
+  font-size:11px;
+  color:#8491a0;
+  margin-bottom:10px;
+}
+
+.file-input{
+  display:none;
+}
+
+.upload-btn{
+  display:inline-block;
+  background:#edf5fd;
+  color:#1268b7;
+  padding:9px 15px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.signature-preview{
+  max-width:100%;
+  max-height:100px;
+  display:none;
+  margin:10px auto 0;
+}
+
+.file-name{
+  font-size:10px;
+  color:#19a66b;
+  margin-top:7px;
+}
+
+.review-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #edf0f4;
+  font-size:12px;
+}
+
+.review-item span:first-child{
+  color:#7b8999;
+}
+
+.review-item span:last-child{
+  font-weight:bold;
+  text-align:left;
+}
+
+.success{
+  text-align:center;
+  padding:15px 0;
+}
+
+.success-icon{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:#e3f8ef;
+  color:#16a568;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:38px;
+  margin:0 auto 15px;
+}
+
+.request-number{
+  background:#edf6ff;
+  color:#1168b9;
+  border:1px dashed #6ca9df;
+  padding:16px;
+  border-radius:15px;
+  font-size:20px;
+  font-weight:bold;
+  letter-spacing:1px;
+  margin:17px 0;
+}
+
+.status{
+  display:inline-block;
+  background:#fff4d7;
+  color:#94701b;
+  padding:7px 13px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+.track-box{
+  display:flex;
+  gap:8px;
+}
+
+.track-box input{
+  flex:1;
+}
+
+.track-result{
+  margin-top:14px;
+  display:none;
+  background:#f6f9fc;
+  border-radius:15px;
+  padding:15px;
+}
+
+.footer{
+  text-align:center;
+  color:#8c98a7;
+  font-size:10px;
+  padding:10px 20px 30px;
+  line-height:1.8;
+}
+
+.official{
+  display:inline-block;
+  margin-top:8px;
+  color:#176fc3;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+@media(max-width:500px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .services{
+    gap:7px;
+  }
+
+  .service{
+    padding:13px 5px;
+  }
+
+  .service-icon{
+    font-size:24px;
+  }
+
+  .service strong{
+    font-size:11px;
+  }
+
+  .hero h2{
+    font-size:24px;
+  }
+
+  .buttons{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="header-top">
+
+    <div class="logo">
+      <div class="logo-icon">🛂</div>
+      <div>
+        <h1>جوازي</h1>
+        <small>الخدمات الإلكترونية للجواز</small>
+      </div>
+    </div>
+
+    <div class="demo">نسخة تجريبية</div>
+
+  </div>
+
+  <div class="hero">
+    <h2>جوازك يبدأ من هنا</h2>
+    <p>
+      منصة إلكترونية تجريبية لتقديم طلبات الجواز
+      ومتابعة حالة الطلب بسهولة من الهاتف.
+    </p>
+  </div>
+
+</header>
+
+<main class="container">
+
+  <div class="notice">
+    ⚠️ <strong>تنبيه:</strong>
+    هذا الموقع نموذج تجريبي غير تابع للحكومة السودانية.
+    لا تستخدم بيانات حقيقية أو صورًا حقيقية أثناء التجربة.
+  </div>
+
+  <!-- الخدمات -->
+
+  <section class="card">
+
+    <h3>اختر الخدمة</h3>
+    <p class="card-sub">حدد نوع المعاملة التي تريد تقديمها</p>
+
+    <div class="services">
+
+      <div class="service active" data-type="new" onclick="selectService('new',this)">
+        <div class="service-icon">🆕</div>
+        <strong>جواز جديد</strong>
+        <span>استخراج لأول مرة</span>
+      </div>
+
+      <div class="service" data-type="renew" onclick="selectService('renew',this)">
+        <div class="service-icon">🔄</div>
+        <strong>تجديد</strong>
+        <span>تجديد جواز سابق</span>
+      </div>
+
+      <div class="service" data-type="lost" onclick="selectService('lost',this)">
+        <div class="service-icon">⚠️</div>
+        <strong>بدل فاقد</strong>
+        <span>جواز مفقود</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- الخطوات -->
+
+  <section class="card">
+
+    <div class="steps">
+
+      <div class="step active" id="stepIndicator1">
+        <div class="step-circle">1</div>
+        البيانات
+      </div>
+
+      <div class="step" id="stepIndicator2">
+        <div class="step-circle">2</div>
+        المعاملة
+      </div>
+
+      <div class="step" id="stepIndicator3">
+        <div class="step-circle">3</div>
+        الصورة
+      </div>
+
+      <div class="step" id="stepIndicator4">
+        <div class="step-circle">4</div>
+        المراجعة
+      </div>
+
+    </div>
+
+
+    <!-- STEP 1 -->
+
+    <div class="form-step active" id="step1">
+
+      <h3>بيانات الهوية السودانية</h3>
+      <p class="card-sub">أدخل بيانات مقدم الطلب</p>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>الاسم الأول بالعربية</label>
+          <input id="ar1" placeholder="مثال: محمد">
+        </div>
+
+        <div class="field">
+          <label>اسم الأب بالعربية</label>
+          <input id="ar2" placeholder="مثال: أحمد">
+        </div>
+
+        <div class="field">
+          <label>اسم الجد بالعربية</label>
+          <input id="ar3" placeholder="مثال: علي">
+        </div>
+
+        <div class="field">
+          <label>اسم العائلة بالعربية</label>
+          <input id="ar4" placeholder="مثال: محمد">
+        </div>
+
+      </div>
+
+      <div class="section-title">
+        الاسم باللغة الإنجليزية
+      </div>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>First Name</label>
+          <input id="en1" placeholder="MOHAMED">
+        </div>
+
+        <div class="field">
+          <label>Father Name</label>
+          <input id="en2" placeholder="AHMED">
+        </div>
+
+        <div class="field">
+          <label>Grandfather Name</label>
+          <input id="en3" placeholder="ALI">
+        </div>
+
+        <div class="field">
+          <label>Family Name</label>
+          <input id="en4" placeholder="MOHAMED">
+        </div>
+
+      </div>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>الجنسية</label>
+          <input value="سوداني 🇸🇩" class="readonly" readonly>
+        </div>
+
+        <div class="field">
+          <label>الرقم الوطني</label>
+          <input id="nationalId" inputmode="numeric" maxlength="20" placeholder="أدخل الرقم الوطني">
+        </div>
+
+        <div class="field">
+          <label>الجنس</label>
+          <select id="gender">
+            <option value="">اختر الجنس</option>
+            <option>ذكر</option>
+            <option>أنثى</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>تاريخ الميلاد</label>
+          <input id="birthDate" type="date">
+        </div>
+
+        <div class="field full">
+          <label>رقم الواتساب</label>
+          <input id="whatsapp" type="tel" placeholder="+249xxxxxxxxx">
+        </div>
+
+      </div>
+
+      <div class="buttons">
+        <button class="btn btn-primary" onclick="nextStep(2)">
+          التالي ←
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- STEP 2 -->
+
+    <div class="form-step" id="step2">
+
+      <h3>تفاصيل المعاملة</h3>
+      <p class="card-sub">حدد تفاصيل طلب الجواز</p>
+
+      <div id="oldPassportFields">
+
+        <div class="grid">
+
+          <div class="field">
+            <label>رقم الجواز السابق</label>
+            <input id="oldPassport" placeholder="رقم الجواز">
+          </div>
+
+          <div class="field">
+            <label>تاريخ انتهاء الجواز</label>
+            <input id="expiryDate" type="date">
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>مركز تقديم/استلام الطلب</label>
+
+        <select id="center">
+          <option value="">اختر المركز</option>
+          <option>الخرطوم</option>
+          <option>بورتسودان</option>
+          <option>ود مدني</option>
+          <option>عطبرة</option>
+          <option>الأبيض</option>
+          <option>كسلا</option>
+          <option>القضارف</option>
+          <option>سنار</option>
+          <option>كوستي</option>
+          <option>شندي</option>
+          <option>دنقلا</option>
+        </select>
+
+      </div>
+
+      <div id="lostReportBox" style="display:none">
+
+        <div class="upload-box">
+
+          <div class="icon">📄</div>
+
+          <p>
+            في النموذج التجريبي يمكنك إرفاق صورة بلاغ الفقدان
+          </p>
+
+          <label for="lostReport" class="upload-btn">
+            اختيار الملف
+          </label>
+
+          <input
+            id="lostReport"
+            class="file-input"
+            type="file"
+            accept="image/*,.pdf"
+            onchange="showFileName(this,'lostFileName')"
+          >
+
+          <div id="lostFileName" class="file-name"></div>
+
+        </div>
+
+      </div>
+
+      <div class="buttons">
+
+        <button class="btn btn-secondary" onclick="nextStep(1)">
+          → السابق
+        </button>
+
+        <button class="btn btn-primary" onclick="nextStep(3)">
+          التالي ←
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- STEP 3 -->
+
+    <div class="form-step" id="step3">
+
+      <h3>الصورة والتوقيع</h3>
+      <p class="card-sub">
+        التقط صورتك بالكاميرا أو ارفع صورة من الهاتف
+      </p>
+
+
+      <!-- الكاميرا -->
+
+      <div class="camera-box">
+
+        <video id="camera" autoplay playsinline></video>
+
+        <div class="camera-placeholder" id="cameraPlaceholder">
+          <div>📷</div>
+          <p>اضغط على فتح الكاميرا لالتقاط الصورة</p>
+        </div>
+
+        <img id="photoPreview" class="photo-preview">
+
+      </div>
+
+      <canvas id="canvas" style="display:none"></canvas>
+
+      <div class="buttons">
+
+        <button class="btn btn-primary" onclick="startCamera()">
+          📷 فتح الكاميرا
+        </button>
+
+        <button class="btn btn-success" onclick="capturePhoto()">
+          التقاط الصورة
+        </button>
+
+      </div>
+
+
+      <div class="upload-box" style="margin-top:14px">
+
+        <div class="icon">🖼️</div>
+
+        <p>أو اختر صورة من الهاتف</p>
+
+        <label for="photoFile" class="upload-btn">
+          اختيار صورة
+        </label>
+
+        <input
+          id="photoFile"
+          class="file-input"
+          type="file"
+          accept="image/*"
+          capture="user"
+          onchange="photoFromFile(this)"
+        >
+
+        <div id="photoFileName" class="file-name"></div>
+
+      </div>
+
+
+      <!-- التوقيع -->
+
+      <div class="section-title">
+        التوقيع الإلكتروني
+      </div>
+
+      <div class="upload-box">
+
+        <div class="icon">✍️</div>
+
+        <p>
+          ارفع صورة واضحة لتوقيع مقدم الطلب
+        </p>
+
+        <label for="signature" class="upload-btn">
+          رفع التوقيع
+        </label>
+
+        <input
+          id="signature"
+          class="file-input"
+          type="file"
+          accept="image/*"
+          onchange="signaturePreview(this)"
+        >
+
+        <img id="signaturePreview" class="signature-preview">
+
+        <div id="signatureName" class="file-name"></div>
+
+      </div>
+
+
+      <!-- الرقم الوطني -->
+
+      <div class="section-title">
+        صورة الرقم الوطني
+      </div>
+
+      <div class="upload-box">
+
+        <div class="icon">🪪</div>
+
+        <p>
+          صورة الرقم الوطني — للتجربة فقط
+        </p>
+
+        <label for="nationalCard" class="upload-btn">
+          رفع صورة الهوية
+        </label>
+
+        <input
+          id="nationalCard"
+          class="file-input"
+          type="file"
+          accept="image/*"
+          onchange="showFileName(this,'idFileName')"
+        >
+
+        <div id="idFileName" class="file-name"></div>
+
+      </div>
+
+
+      <div class="buttons">
+
+        <button class="btn btn-secondary" onclick="nextStep(2)">
+          → السابق
+        </button>
+
+        <button class="btn btn-primary" onclick="nextStep(4)">
+          مراجعة الطلب ←
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- STEP 4 -->
+
+    <div class="form-step" id="step4">
+
+      <h3>مراجعة الطلب</h3>
+      <p class="card-sub">
+        تأكد من صحة البيانات قبل إرسال الطلب التجريبي
+      </p>
+
+      <div id="reviewData"></div>
+
+      <div class="notice" style="margin-top:15px">
+        🔒 في هذه النسخة التجريبية لا يتم إرسال الصور أو البيانات
+        إلى خادم حكومي.
+      </div>
+
+      <div class="buttons">
+
+        <button class="btn btn-secondary" onclick="nextStep(3)">
+          تعديل
+        </button>
+
+        <button class="btn btn-success" onclick="submitApplication()">
+          ✓ تأكيد الطلب
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUCCESS -->
+
+    <div class="form-step" id="successStep">
+
+      <div class="success">
+
+        <div class="success-icon">✓</div>
+
+        <h3>تم إنشاء الطلب التجريبي</h3>
+
+        <p class="card-sub">
+          احتفظ برقم الطلب لمتابعته
+        </p>
+
+        <div class="request-number" id="requestNumber">
+          JW-2026-00000
+        </div>
+
+        <span class="status">
+          قيد المراجعة
+        </span>
+
+        <div class="buttons">
+
+          <button class="btn btn-primary" onclick="resetForm()">
+            طلب جديد
+          </button>
+
+          <button class="btn btn-secondary" onclick="scrollToTrack()">
+            متابعة الطلب
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- متابعة الطلب -->
+
+  <section class="card" id="tracking">
+
+    <h3>متابعة الطلب</h3>
+
+    <p class="card-sub">
+      أدخل رقم الطلب لمعرفة حالته
+    </p>
+
+    <div class="track-box">
+
+      <input
+        id="trackingNumber"
+        placeholder="مثال: JW-2026-12345"
+      >
+
+      <button class="btn btn-primary" onclick="trackApplication()">
+        بحث
+      </button>
+
+    </div>
+
+    <div class="track-result" id="trackResult"></div>
+
+  </section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div>
+    جوازي © 2026 — نموذج تجريبي
+  </div>
+
+  <div>
+    هذا الموقع ليس موقعًا حكوميًا رسميًا.
+  </div>
+
+  <a
+    class="official"
+    href="https://queue.passports.gov.sd/"
+    target="_blank"
+  >
+    الموقع الرسمي للحجز الإلكتروني ↗
+  </a>
+
+</footer>
+
+
+<script>
+
+let currentStep = 1;
+let serviceType = "new";
+let cameraStream = null;
+let capturedPhoto = false;
+
+const applicationsKey = "jawaziApplications";
+
+
+function selectService(type, element){
+
+  serviceType = type;
+
+  document.querySelectorAll(".service").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  element.classList.add("active");
+
+  const oldFields = document.getElementById("oldPassportFields");
+  const lostBox = document.getElementById("lostReportBox");
+
+  if(type === "new"){
+    oldFields.style.display = "none";
+    lostBox.style.display = "none";
+  }
+
+  if(type === "renew"){
+    oldFields.style.display = "block";
+    lostBox.style.display = "none";
+  }
+
+  if(type === "lost"){
+    oldFields.style.display = "block";
+    lostBox.style.display = "block";
+  }
+}
+
+
+function nextStep(step){
+
+  if(step === 2 && !validateStep1()){
+    return;
+  }
+
+  if(step === 3 && !validateStep2()){
+    return;
+  }
+
+  if(step === 4){
+
+    if(!capturedPhoto && !document.getElementById("photoFile").files.length){
+      alert("يرجى التقاط صورة أو اختيار صورة من الهاتف.");
+      return;
+    }
+
+    buildReview();
+  }
+
+  stopCamera();
+
+  document.querySelectorAll(".form-step").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  const target = document.getElementById("step"+step);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  currentStep = step;
+
+  updateIndicators(step);
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function validateStep1(){
+
+  const required = [
+    ["ar1","الاسم الأول بالعربية"],
+    ["ar2","اسم الأب بالعربية"],
+    ["ar3","اسم الجد بالعربية"],
+    ["ar4","اسم العائلة بالعربية"],
+    ["en1","First Name"],
+    ["en2","Father Name"],
+    ["en3","Grandfather Name"],
+    ["en4","Family Name"],
+    ["nationalId","الرقم الوطني"],
+    ["gender","الجنس"],
+    ["birthDate","تاريخ الميلاد"],
+    ["whatsapp","رقم الواتساب"]
+  ];
+
+  for(const item of required){
+
+    const el = document.getElementById(item[0]);
+
+    if(!el.value.trim()){
+
+      alert("يرجى إدخال: " + item[1]);
+
+      el.focus();
+
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+function validateStep2(){
+
+  const center = document.getElementById("center");
+
+  if(!center.value){
+
+    alert("يرجى اختيار مركز تقديم/استلام الطلب.");
+
+    center.focus();
+
+    return false;
+  }
+
+  if(serviceType !== "new"){
+
+    const passport = document.getElementById("oldPassport");
+
+    if(!passport.value.trim()){
+
+      alert("يرجى إدخال رقم الجواز السابق.");
+
+      passport.focus();
+
+      return false;
+    }
+  }
+
+  if(serviceType === "lost"){
+
+    const file = document.getElementById("lostReport").files.length;
+
+    if(!file){
+
+      alert("يرجى رفع صورة أو ملف بلاغ الفقدان.");
+
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+function updateIndicators(step){
+
+  for(let i=1;i<=4;i++){
+
+    const el = document.getElementById("stepIndicator"+i);
+
+    el.classList.remove("active","done");
+
+    if(i < step){
+      el.classList.add("done");
+    }
+
+    if(i === step){
+      el.classList.add("active");
+    }
+  }
+}
+
+
+async function startCamera(){
+
+  const video = document.getElementById("camera");
+  const placeholder = document.getElementById("cameraPlaceholder");
+  const preview = document.getElementById("photoPreview");
+
+  try{
+
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+
+      alert("الكاميرا غير مدعومة في هذا المتصفح. استخدم خيار رفع الصورة.");
+
+      return;
+    }
+
+    stopCamera();
+
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video:{
+        facingMode:"user",
+        width:{ideal:1280},
+        height:{ideal:1280}
+      },
+      audio:false
+    });
+
+    video.srcObject = cameraStream;
+
+    video.style.display = "block";
+    placeholder.style.display = "none";
+    preview.style.display = "none";
+
+  }catch(error){
+
+    console.log(error);
+
+    alert(
+      "تعذر فتح الكاميرا.\n\n" +
+      "تأكد من السماح للموقع باستخدام الكاميرا، " +
+      "وأن الموقع مفتوح عبر HTTPS."
+    );
+  }
+}
+
+
+function capturePhoto(){
+
+  const video = document.getElementById("camera");
+  const canvas = document.getElementById("canvas");
+  const preview = document.getElementById("photoPreview");
+
+  if(!cameraStream){
+
+    alert("افتح الكاميرا أولاً.");
+
+    return;
+  }
+
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  const ctx = canvas.getContext("2d");
+
+  ctx.drawImage(
+    video,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  preview.src = canvas.toDataURL("image/jpeg",0.9);
+
+  preview.style.display = "block";
+
+  video.style.display = "none";
+
+  capturedPhoto = true;
+
+  stopCamera();
+
+  document.getElementById("photoFileName").textContent =
+    "✓ تم التقاط الصورة بالكاميرا";
+}
+
+
+function stopCamera(){
+
+  if(cameraStream){
+
+    cameraStream.getTracks().forEach(track=>{
+      track.stop();
+    });
+
+    cameraStream = null;
+  }
+}
+
+
+function photoFromFile(input){
+
+  if(!input.files.length) return;
+
+  const file = input.files[0];
+
+  const preview = document.getElementById("photoPreview");
+
+  preview.src = URL.createObjectURL(file);
+
+  preview.style.display = "block";
+
+  document.getElementById("camera").style.display = "none";
+
+  document.getElementById("cameraPlaceholder").style.display = "none";
+
+  document.getElementById("photoFileName").textContent =
+    "✓ تم اختيار: " + file.name;
+
+  capturedPhoto = false;
+}
+
+
+function signaturePreview(input){
+
+  if(!input.files.length) return;
+
+  const file = input.files[0];
+
+  const img = document.getElementById("signaturePreview");
+
+  img.src = URL.createObjectURL(file);
+
+  img.style.display = "block";
+
+  document.getElementById("signatureName").textContent =
+    "✓ تم رفع التوقيع: " + file.name;
+}
+
+
+function showFileName(input,target){
+
+  if(!input.files.length) return;
+
+  document.getElementById(target).textContent =
+    "✓ تم اختيار: " + input.files[0].name;
+}
+
+
+function getServiceName(){
+
+  if(serviceType === "new"){
+    return "استخراج جواز جديد";
+  }
+
+  if(serviceType === "renew"){
+    return "تجديد جواز";
+  }
+
+  return "بدل فاقد";
+}
+
+
+function buildReview(){
+
+  const arName = [
+    "ar1","ar2","ar3","ar4"
+  ].map(id=>document.getElementById(id).value).join(" ");
+
+  const enName = [
+    "en1","en2","en3","en4"
+  ].map(id=>document.getElementById(id).value).join(" ");
+
+  const photoUploaded =
+    capturedPhoto ||
+    document.getElementById("photoFile").files.length;
+
+  const signatureUploaded =
+    document.getElementById("signature").files.length;
+
+  const idUploaded =
+    document.getElementById("nationalCard").files.length;
+
+  const data = [
+
+    ["الخدمة",getServiceName()],
+
+    ["الاسم بالعربية",arName],
+
+    ["الاسم بالإنجليزية",enName],
+
+    ["الجنسية","سوداني 🇸🇩"],
+
+    ["الرقم الوطني",document.getElementById("nationalId").value],
+
+    ["الجنس",document.getElementById("gender").value],
+
+    ["تاريخ الميلاد",document.getElementById("birthDate").value],
+
+    ["الواتساب",document.getElementById("whatsapp").value],
+
+    ["المركز",document.getElementById("center").value],
+
+    ["الصورة",photoUploaded ? "✓ مرفقة" : "غير مرفقة"],
+
+    ["التوقيع",signatureUploaded ? "✓ مرفق" : "غير مرفق"],
+
+    ["صورة الرقم الوطني",idUploaded ? "✓ مرفقة" : "غير مرفقة"]
+
+  ];
+
+  if(serviceType !== "new"){
+
+    data.push([
+      "رقم الجواز السابق",
+      document.getElementById("oldPassport").value
+    ]);
+
+  }
+
+  document.getElementById("reviewData").innerHTML =
+    data.map(item=>`
+
+      <div class="review-item">
+
+        <span>${escapeHTML(item[0])}</span>
+
+        <span>${escapeHTML(item[1])}</span>
+
+      </div>
+
+    `).join("");
+}
+
+
+function escapeHTML(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+function submitApplication(){
+
+  const number =
+    "JW-" +
+    new Date().getFullYear() +
+    "-" +
+    Math.floor(10000 + Math.random()*90000);
+
+  const application = {
+
+    number:number,
+
+    service:getServiceName(),
+
+    name:[
+      document.getElementById("ar1").value,
+      document.getElementById("ar2").value,
+      document.getElementById("ar3").value,
+      document.getElementById("ar4").value
+    ].join(" "),
+
+    nationalId:
+      document.getElementById("nationalId").value,
+
+    center:
+      document.getElementById("center").value,
+
+    status:"قيد المراجعة",
+
+    date:new Date().toLocaleString("ar-SD")
+
+  };
+
+  let applications =
+    JSON.parse(localStorage.getItem(applicationsKey) || "[]");
+
+  applications.push(application);
+
+  localStorage.setItem(
+    applicationsKey,
+    JSON.stringify(applications)
+  );
+
+  stopCamera();
+
+  document.querySelectorAll(".form-step").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  document.getElementById("successStep").classList.add("active");
+
+  document.getElementById("requestNumber").textContent = number;
+
+  document.querySelectorAll(".step").forEach(el=>{
+    el.classList.remove("active");
+    el.classList.add("done");
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function trackApplication(){
+
+  const number =
+    document.getElementById("trackingNumber").value.trim();
+
+  const result =
+    document.getElementById("trackResult");
+
+  if(!number){
+
+    alert("أدخل رقم الطلب.");
+
+    return;
+  }
+
+  const applications =
+    JSON.parse(localStorage.getItem(applicationsKey) || "[]");
+
+  const found =
+    applications.find(app=>app.number === number);
+
+  result.style.display = "block";
+
+  if(!found){
+
+    result.innerHTML = `
+      <strong>لم يتم العثور على الطلب</strong>
+      <p style="font-size:11px;color:#8491a0;margin-top:6px">
+        تأكد من كتابة رقم الطلب بشكل صحيح.
+      </p>
+    `;
+
+    return;
+  }
+
+  result.innerHTML = `
+
+    <div class="review-item">
+      <span>رقم الطلب</span>
+      <span>${escapeHTML(found.number)}</span>
+    </div>
+
+    <div class="review-item">
+      <span>نوع المعاملة</span>
+      <span>${escapeHTML(found.service)}</span>
+    </div>
+
+    <div class="review-item">
+      <span>مقدم الطلب</span>
+      <span>${escapeHTML(found.name)}</span>
+    </div>
+
+    <div class="review-item">
+      <span>المركز</span>
+      <span>${escapeHTML(found.center)}</span>
+    </div>
+
+    <div style="margin-top:12px">
+      <span class="status">
+        ${escapeHTML(found.status)}
+      </span>
+    </div>
+  `;
+}
+
+
+function resetForm(){
+
+  location.reload();
+
+}
+
+
+function scrollToTrack(){
+
+  document.getElementById("tracking")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+}
+
+
+selectService(
+  "new",
+  document.querySelector('.service[data-type="new"]')
+);
+
+</script>
+
+</body>
+</html>
